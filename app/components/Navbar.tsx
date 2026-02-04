@@ -17,8 +17,19 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 backdrop-blur-md border-b border-white/20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="sticky top-0 z-50 border-b border-white/20 bg-[#001D4A] backdrop-blur-md">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                    src="/unmaad assets/royal-blue.png"
+                    alt="Navbar Background"
+                    fill
+                    className="object-cover opacity-80"
+                    priority
+                />
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     {/* Left: Logo */}
                     <div className="shrink-0 flex items-center">
@@ -28,7 +39,7 @@ const Navbar = () => {
                                 alt="Unmaad Logo"
                                 width={150}
                                 height={50}
-                                className="h-7 w-auto object-contain"
+                                className="h-5 md:h-7 w-auto object-contain"
                             />
                         </Link>
                     </div>
@@ -109,32 +120,36 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-white/90 backdrop-blur-md" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-indigo-500 hover:text-indigo-900 block px-3 py-2 rounded-md text-base font-medium font-century-gothic"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <div className="mt-4 px-3">
+            {/* Mobile Menu - Sliding Overlay */}
+            <div
+                className={`md:hidden absolute top-full left-0 w-full overflow-hidden transition-all duration-500 ease-in-out bg-white ${isOpen ? 'max-h-[500px] opacity-100 shadow-xl' : 'max-h-0 opacity-0 pointer-events-none'
+                    }`}
+                id="mobile-menu"
+            >
+                <div className="relative z-10 px-4 pt-2 pb-6 space-y-1 sm:px-6 border-t border-gray-100">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className="text-indigo-900 hover:text-indigo-600 block px-3 py-3 rounded-md text-base font-medium font-century-gothic transition-colors border-b border-gray-50"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    <div className="mt-6 px-3 flex justify-center">
+                        <Link href="#tickets" onClick={() => setIsOpen(false)}>
                             <Image
-                                src="/unmaad assets/ticket-button.png"
+                                src="/unmaad assets/tic-button.svg"
                                 alt="Get Tickets"
                                 width={120}
                                 height={40}
-                                className="h-8 w-auto object-contain"
+                                className="h-9 w-auto object-contain cursor-pointer hover:scale-105 transition-transform"
                             />
-                        </div>
+                        </Link>
                     </div>
                 </div>
-            )}
+            </div>
         </nav>
     );
 };
