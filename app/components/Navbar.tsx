@@ -24,7 +24,7 @@ const Navbar = () => {
                     <div className="shrink-0 flex items-center">
                         <Link href="/">
                             <Image
-                                src="/unmaad assets/unmaad-logo.png"
+                                src="/unmaad assets/unm.svg"
                                 alt="Unmaad Logo"
                                 width={150}
                                 height={50}
@@ -52,7 +52,7 @@ const Navbar = () => {
                     <div className="hidden md:block shrink-0">
                         <Link href="#tickets">
                             <Image
-                                src="/unmaad assets/ticket-button.png"
+                                src="/unmaad assets/tic-button.svg"
                                 alt="Get Tickets"
                                 width={120}
                                 height={40}

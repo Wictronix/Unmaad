@@ -77,7 +77,7 @@ const EventsStreet = () => {
             {/* Pattern Overlay (Overlaps both) */}
             <div className="absolute inset-0 z-10 pointer-events-none">
                 <Image
-                    src="/unmaad assets/pattern.png"
+                    src="/unmaad assets/pattern.svg"
                     alt="Pattern Overlay"
                     fill
                     className="object-cover"
@@ -95,7 +95,7 @@ const EventsStreet = () => {
                 {/* Button */}
                 <Link href="#explore" className="relative group block hover:scale-105 transition-transform mb-10">
                     <Image
-                        src="/unmaad assets/home-button.png"
+                        src="/unmaad assets/home-button.svg"
                         alt="Explore all event"
                         width={150}
                         height={50}

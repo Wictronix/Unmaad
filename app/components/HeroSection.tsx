@@ -11,6 +11,26 @@ const HeroSection = () => {
     return (
         <section className="relative flex flex-col items-center justify-center min-h-150 pt-20 pb-16 text-center overflow-hidden">
 
+            {/* Background Images */}
+            <div className="absolute inset-0 z-[-20]">
+                <Image
+                    src="/unmaad assets/royal-blue.png"
+                    alt="Royal Blue Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </div>
+            <div className="absolute inset-0 z-[-10]">
+                <Image
+                    src="/unmaad assets/pattern.svg"
+                    alt="Pattern Overlay"
+                    fill
+                    className="object-cover opacity-100"
+                    priority
+                />
+            </div>
+
             {/* Container for the central composition */}
             <div className="relative z-10 flex flex-col items-center">
 
@@ -23,7 +43,7 @@ const HeroSection = () => {
                 {/* 1. Evil Eye (Top) */}
                 <div className="-mb-30">
                     <Image
-                        src="/unmaad assets/evil-eye.png"
+                        src="/unmaad assets/evileye.svg"
                         alt="Evil Eye"
                         width={40}
                         height={40}
@@ -37,14 +57,14 @@ const HeroSection = () => {
                     {/* Left Flowers (Stacked to the left edge of logo) */}
                     <div className="flex flex-col gap-0   z-0">
                         <Image
-                            src="/unmaad assets/pink-flower-1.png"
+                            src="/unmaad assets/pink1.svg"
                             alt="Flower 1"
                             width={200}
                             height={200}
                             className="w-50 h-50 object-contain"
                         />
                         <Image
-                            src="/unmaad assets/pink-flower-3.png"
+                            src="/unmaad assets/pink3.svg"
                             alt="Flower 3"
                             width={200}
                             height={200}
@@ -55,7 +75,7 @@ const HeroSection = () => {
                     {/* Center Logo */}
                     <div className="z-10 -mt-10">
                         <Image
-                            src="/unmaad assets/unmaad-logo.png"
+                            src="/unmaad assets/unm.svg"
                             alt="Unmaad Logo"
                             width={500}
                             height={500}
@@ -67,14 +87,14 @@ const HeroSection = () => {
                     {/* Right Flowers (Stacked to the right edge of logo) */}
                     <div className="flex flex-col gap-0  z-0">
                         <Image
-                            src="/unmaad assets/pink-flower-2.png"
+                            src="/unmaad assets/pink2.svg"
                             alt="Flower 2"
                             width={200}
                             height={200}
                             className="w-50 h-50 object-contain"
                         />
                         <Image
-                            src="/unmaad assets/pink-flower-4.png"
+                            src="/unmaad assets/pink4.svg"
                             alt="Flower 4"
                             width={200}
                             height={200}
@@ -86,7 +106,7 @@ const HeroSection = () => {
                 {/* 4. Tagline (Below Logo) */}
                 <div className="-mt-40 mb-2 relative z-20">
                     <Image
-                        src="/unmaad assets/tagline.png"
+                        src="/unmaad assets/tag.svg"
                         alt="Tagline"
                         width={400}
                         height={500}
@@ -98,7 +118,7 @@ const HeroSection = () => {
                 <div className="flex gap-7 mt-12">
                     <Link href="#get-started" className="relative group block hover:scale-105 transition-transform">
                         <Image
-                            src="/unmaad assets/home-button.png"
+                            src="/unmaad assets/home-button.svg"
                             alt="Book your Spot"
                             width={150}
                             height={50}
@@ -110,7 +130,7 @@ const HeroSection = () => {
                     </Link>
                     <Link href="#learn-more" className="relative group block hover:scale-105 transition-transform">
                         <Image
-                            src="/unmaad assets/home-button.png"
+                            src="/unmaad assets/home-button.svg"
                             alt="Enter the Street"
                             width={150}
                             height={50}

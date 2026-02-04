@@ -25,7 +25,7 @@ const UnmaadJunction = () => {
             {/* Pattern Overlay */}
             <div className="absolute inset-0 z-10 pointer-events-none opacity-50">
                 <Image
-                    src="/unmaad assets/pattern.png"
+                    src="/unmaad assets/pattern.svg"
                     alt="Pattern Overlay"
                     fill
                     className="object-cover"
@@ -63,11 +63,11 @@ const UnmaadJunction = () => {
                 {/* Button */}
                 <Link href="#shops" className="relative group block hover:scale-105 transition-transform">
                     <Image
-                        src="/unmaad assets/home-button.png"
+                        src="/unmaad assets/home-button.svg"
                         alt="Explore Shops"
                         width={150}
                         height={50}
-                        className="w-60 md:w-60 h-auto object-contain"
+                        className="w-60 md:w-70 h-auto object-contain"
                     />
                     <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-xl md:text-2xl font-bold ${baiJamjuree.className}`}>
                         Watch Aftermovie
