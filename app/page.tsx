@@ -1,18 +1,18 @@
 import Image from "next/image";
 
 
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import EventsStreet from "./components/EventsStreet";
-import UnmaadJunction from "./components/UnmaadJunction";
-import Footer from "./components/Footer";
+import Navbar from "@/app/components/Navbar";
+import HeroSection from "@/app/pages/home/HeroSection";
+import Street from "@/app/pages/home/Street";
+import UnmaadJunction from "@/app/pages/home/UnmaadJunction";
+import Footer from "@/app/components/Footer";
 
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col font-sans text-white">
       <Navbar />
       <HeroSection />
-      <EventsStreet />
+      <Street />
       <UnmaadJunction />
       <Footer />
     </main>

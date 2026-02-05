@@ -8,26 +8,16 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
-        { name: "Unmaad Junction", href: "#unmaad-junction" },
-        { name: "Events Street", href: "#event" },
-        { name: "Competitions Bazaar", href: "#competition" },
-        { name: "Merch Store", href: "#merch" },
-        { name: "Sponsor Alley", href: "#sponsor" },
-        { name: "Contact Spot", href: "#contact" },
+        { name: "Unmaad Junction", href: "/#unmaad-junction" },
+        { name: "Events Street", href: "/pages/events-street" },
+        { name: "Competitions Bazaar", href: "/#competition" },
+        { name: "Merch Store", href: "/#merch" },
+        { name: "Sponsor Alley", href: "/#sponsor" },
+        { name: "Contact Spot", href: "/#contact" },
     ];
 
     return (
-        <nav className="sticky top-0 z-[100] border-b border-white/20 bg-[#001D4A]/60 backdrop-blur-md">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <Image
-                    src="/unmaad assets/royal-blue.png"
-                    alt="Navbar Background"
-                    fill
-                    className="object-cover opacity-40"
-                    priority
-                />
-            </div>
+        <nav className="sticky top-0 z-[100] bg-white/10 backdrop-blur-md transition-all duration-300">
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 lg:h-20">
@@ -122,7 +112,7 @@ const Navbar = () => {
 
             {/* Mobile Menu - Sliding Overlay */}
             <div
-                className={`lg:hidden absolute top-full left-0 w-full overflow-hidden transition-all duration-500 ease-in-out bg-white ${isOpen ? 'max-h-[500px] opacity-100 shadow-xl' : 'max-h-0 opacity-0 pointer-events-none'
+                className={`lg:hidden absolute top-full left-0 w-full overflow-hidden transition-all duration-500 ease-in-out bg-white/[0.85] ${isOpen ? 'max-h-[500px] opacity-100 shadow-xl' : 'max-h-0 opacity-0 pointer-events-none'
                     }`}
                 id="mobile-menu"
             >
@@ -131,7 +121,7 @@ const Navbar = () => {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-indigo-900 hover:text-indigo-600 block px-3 py-3 rounded-md text-base font-medium font-century-gothic transition-colors border-b border-gray-50"
+                            className="text-indigo-900 hover:text-amber-400 block px-3 py-3 rounded-md text-base font-medium font-century-gothic transition-colors border-b border-gray-300"
                             onClick={() => setIsOpen(false)}
                         >
                             {link.name}

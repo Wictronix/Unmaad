@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+    scroll-behavior: smooth;
+}
+
 @layer utilities {
     .font-century-gothic {
         font-family: "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
