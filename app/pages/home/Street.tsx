@@ -84,7 +84,7 @@ const Street = () => {
 
                     {/* Button */}
                     <div className="flex justify-center mb-12 md:mb-16">
-                        <Link href="#explore" className="relative group block hover:scale-105 transition-transform">
+                        <Link href="#explore" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
                             <Image
                                 src="/unmaad assets/home-button.svg"
                                 alt="Explore all event"

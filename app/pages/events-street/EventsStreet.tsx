@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Bai_Jamjuree } from 'next/font/google';
+import { motion } from "framer-motion";
 
 const baiJamjuree = Bai_Jamjuree({
     weight: '700',
@@ -11,9 +12,9 @@ const baiJamjuree = Bai_Jamjuree({
 const EventsStreet = () => {
     return (
         <section className="w-full bg-[#001D4A]">
-            {/* Title Section */}
+            {/* ... existing code ... */}
             <div className="relative w-full h-[40vh] flex items-center justify-center overflow-hidden">
-                {/* Background Layer */}
+                {/* ... existing code ... */}
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/unmaad assets/royal-blue.png"
@@ -23,8 +24,7 @@ const EventsStreet = () => {
                         priority
                     />
                 </div>
-
-                {/* Pattern Overlay */}
+                {/* ... existing code ... */}
                 <div className="absolute inset-0 z-10 opacity-50 pointer-events-none">
                     <Image
                         src="/unmaad assets/pattern.svg"
@@ -33,8 +33,7 @@ const EventsStreet = () => {
                         className="object-cover"
                     />
                 </div>
-
-                {/* Title Content */}
+                {/* ... existing code ... */}
                 <div className="relative z-20 text-center">
                     <h1 className="text-5xl md:text-7xl text-white font-samarkan">
                         Events Street
@@ -65,32 +64,136 @@ const EventsStreet = () => {
 
                 {/* Top Strip */}
                 <div className="relative z-30 w-full transform rotate-180">
-                    <Image
-                        src="/unmaad assets/events street/mandala-strip.svg"
-                        alt="Mandala Strip Top"
-                        width={1920}
-                        height={100}
-                        className="w-full h-auto object-cover"
-                    />
+                    <div className="relative w-full z-20">
+                        <Image
+                            src="/unmaad assets/events street/mandala-strip.svg"
+                            alt="Mandala Strip Top"
+                            width={1920}
+                            height={100}
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
                 </div>
 
                 {/* Content Area - Buttons & Cards */}
-                <div className="relative z-20 flex-grow flex flex-col items-center justify-center py-10 gap-24 px-4">
+                <div className="relative z-20 flex-grow flex flex-col items-center justify-center py-10 gap-10 px-4">
 
-                    {/* Buttons Row */}
-                    <div className="flex items-center justify-center gap-8 md:gap-16 flex-wrap">
-                        {["Proshows", "Workshops", "Jam nights/Comedy show"].map((text, index) => (
-                            <div key={index} className="relative group cursor-pointer hover:scale-105 transition-transform">
-                                <Image
-                                    src="/unmaad assets/events street/purple-button.svg"
-                                    alt={text}
-                                    width={250}
-                                    height={90}
-                                    className="w-52 md:w-80 h-auto object-contain"
-                                />
-                                <span className={`absolute inset-0 flex items-center justify-center text-white text-xs md:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className}`}>
-                                    {text}
-                                </span>
+                    {/* Buttons Row - Overlapping Top Strip */}
+                    <div className="flex flex-col sm:flex-row sm:flex-wrap md:grid md:grid-cols-2 md:place-items-center lg:flex lg:flex-nowrap items-center justify-center gap-4 md:gap-y-12 md:gap-x-24 relative z-10 w-full max-w-6xl mx-auto mb-[38px] md:mb-16">
+                        {["Proshows", "Workshops", "Jam nights"].map((text, index) => (
+                            <div key={index} className={`relative flex flex-col items-center ${index === 2 ? 'md:col-span-2' : ''}`}>
+                                {/* Branch Decoration - Scattered & Behind */}
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 3, duration: 0.5 }}
+                                    className={`absolute -z-10 animate-leaf-fall hidden lg:block
+                                    ${index === 0 ? '-top-10 -left-12' : ''}
+                                    ${index === 1 ? '-bottom-12 left-10' : ''}
+                                    ${index === 2 ? '-top-8 -right-[29px] translate-x-1/2' : ''}
+                                `}
+                                    style={{ animationDelay: `${index * 0.2}s` }}
+                                >
+                                    <div className="animate-float-rotate" style={{ animationDelay: `${index * 0.5}s` }}>
+                                        <Image
+                                            src={index % 2 === 0
+                                                ? "/unmaad assets/events street/branch1.svg"
+                                                : "/unmaad assets/events street/branch2.svg"
+                                            }
+                                            alt="Branch"
+                                            width={105}
+                                            height={105}
+                                            className={`w-[105px] h-[105px] object-contain
+                                            ${index === 0 ? '-rotate-[35deg]' : ''}
+                                            ${index === 1 ? 'rotate-[20deg]' : ''}
+                                            ${index === 2 ? 'rotate-180' : ''}
+                                        `}
+                                        />
+                                    </div>
+                                </motion.div>
+
+                                {/* Extra Random Branches */}
+                                {index === 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 3, duration: 0.5 }}
+                                        className="absolute -z-10 -right-16 top-12 animate-leaf-fall hidden lg:block" style={{ animationDelay: '0.4s' }}>
+                                        <div className="animate-float-rotate" style={{ animationDelay: '1.2s' }}>
+                                            <Image
+                                                src="/unmaad assets/events street/branch2.svg"
+                                                alt="Branch"
+                                                width={105}
+                                                height={105}
+                                                className="w-[105px] h-[105px] object-contain rotate-[70deg]"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                )}
+                                {index === 1 && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 3, duration: 0.5 }}
+                                        className="absolute -z-10 -top-16 -left-[75px] animate-leaf-fall hidden lg:block" style={{ animationDelay: '0.5s' }}>
+                                        <div className="animate-float-rotate" style={{ animationDelay: '0.8s' }}>
+                                            <Image
+                                                src="/unmaad assets/events street/branch1.svg"
+                                                alt="Branch"
+                                                width={105}
+                                                height={105}
+                                                className="w-[105px] h-[105px] object-contain -rotate-[15deg] scale-x-[-1]"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                )}
+                                {index === 2 && (
+                                    <>
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 3, duration: 0.5 }}
+                                            className="absolute -z-10 -bottom-10 -left-20 animate-leaf-fall hidden lg:block" style={{ animationDelay: '0.6s' }}>
+                                            <div className="animate-float-rotate" style={{ animationDelay: '2.5s' }}>
+                                                <Image
+                                                    src="/unmaad assets/events street/branch2.svg"
+                                                    alt="Branch"
+                                                    width={105}
+                                                    height={105}
+                                                    className="w-[105px] h-[105px] object-contain rotate-[100deg]"
+                                                />
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 3, duration: 0.5 }}
+                                            className="absolute -z-10 -left-[79px] -top-12 animate-leaf-fall hidden lg:block" style={{ animationDelay: '0.7s' }}>
+                                            <div className="animate-float-rotate" style={{ animationDelay: '1.8s' }}>
+                                                <Image
+                                                    src="/unmaad assets/events street/branch1.svg"
+                                                    alt="Branch"
+                                                    width={105}
+                                                    height={105}
+                                                    className="w-[105px] h-[105px] object-contain -rotate-[20deg]"
+                                                />
+                                            </div>
+                                        </motion.div>
+                                    </>
+                                )}
+
+                                <div className="relative group cursor-pointer rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
+                                    <Image
+                                        src="/unmaad assets/events street/purple-button.svg"
+                                        alt={text}
+                                        width={250}
+                                        height={90}
+                                        className="w-64 sm:w-60 md:w-60 lg:w-80 h-auto object-contain"
+                                    />
+                                    <span className={`absolute inset-0 flex items-center justify-center text-white text-xs md:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className}`}>
+                                        {text}
+                                    </span>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -104,14 +207,29 @@ const EventsStreet = () => {
                                     alt={`Window Card ${item}`}
                                     width={300}
                                     height={400}
-                                    className="w-64 md:w-80 h-auto object-contain"
+                                    className="w-[246px] md:w-80 h-auto object-contain"
                                 />
+                                {item === 2 && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 3, duration: 0.5 }}
+                                        className="absolute -bottom-8 -right-8 z-10 animate-float-rotate hidden md:block">
+                                        <Image
+                                            src="/unmaad assets/events street/branch1.svg"
+                                            alt="Branch Decoration"
+                                            width={105}
+                                            height={105}
+                                            className="w-[105px] h-[105px] object-contain rotate-45"
+                                        />
+                                    </motion.div>
+                                )}
                             </div>
                         ))}
                     </div>
 
                     {/* Book Your Spot Button */}
-                    <div className="relative group cursor-pointer hover:scale-105 transition-transform mt-8">
+                    <div className="relative group cursor-pointer block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)] mt-8">
                         <Image
                             src="/unmaad assets/home-button.svg"
                             alt="Book your spot"
@@ -128,13 +246,126 @@ const EventsStreet = () => {
 
                 {/* Bottom Strip */}
                 <div className="relative z-30 w-full">
-                    <Image
-                        src="/unmaad assets/events street/mandala-strip.svg"
-                        alt="Mandala Strip Bottom"
-                        width={1920}
-                        height={100}
-                        className="w-full h-auto object-cover block"
-                    />
+                    {/* Left Plant */}
+                    <div className="absolute -bottom-[60px] left-[8%] md:left-[22%] z-10 animate-float-rotate">
+                        <Image
+                            src="/unmaad assets/events street/plant.svg"
+                            alt="Plant Decoration Left"
+                            width={130}
+                            height={155}
+                            className="w-[110px] md:w-[160px] h-auto object-contain scale-x-[-1]"
+                        />
+                    </div>
+
+                    {/* Right Plant */}
+                    <div className="absolute -bottom-[60px] right-[8%] md:right-[22%] z-10 animate-float-rotate" style={{ animationDelay: '1s' }}>
+                        <Image
+                            src="/unmaad assets/events street/plant.svg"
+                            alt="Plant Decoration Right"
+                            width={130}
+                            height={155}
+                            className="w-[110px] md:w-[160px] h-auto object-contain"
+                        />
+                    </div>
+
+                    <div className="relative z-20">
+                        <Image
+                            src="/unmaad assets/events street/mandala-strip.svg"
+                            alt="Mandala Strip Bottom"
+                            width={1920}
+                            height={100}
+                            className="w-full h-auto object-cover block"
+                        />
+                    </div>
+                </div>
+
+                {/* Mobile Only Scattered Branches (Background) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none md:hidden">
+                    {[
+                        { src: "/unmaad assets/events street/branch1.svg", top: "5%", left: "-5%", rotate: "160deg", size: 95 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "15%", right: "-8%", rotate: "-25deg", size: 105 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "32%", left: "2%", rotate: "40deg", size: 85 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "48%", right: "5%", rotate: "-15deg", size: 100 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "62%", left: "-8%", rotate: "80deg", size: 90 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "70%", right: "-5%", rotate: "130deg", size: 95 },
+                    ].map((branch, i) => (
+                        <div
+                            key={i}
+                            className="absolute z-0"
+                            style={{
+                                top: branch.top,
+                                left: branch.left,
+                                right: branch.right
+                            }}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 3, duration: 0.5 }}
+                                className="animate-float-rotate" style={{ animationDelay: `${i * 0.3}s` }}>
+                                <Image
+                                    src={branch.src}
+                                    alt="Branch"
+                                    width={branch.size}
+                                    height={branch.size}
+                                    className="object-contain opacity-100"
+                                    style={{
+                                        width: `${branch.size}px`,
+                                        height: `${branch.size}px`,
+                                        transform: `rotate(${branch.rotate})`
+                                    }}
+                                />
+                            </motion.div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Tablet Only Scattered Branches (12 Random) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none hidden md:block lg:hidden">
+                    {[
+                        { src: "/unmaad assets/events street/branch1.svg", top: "5%", left: "5%", rotate: "45deg", size: 110 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "15%", right: "8%", rotate: "-30deg", size: 120 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "45%", left: "10%", rotate: "135deg", size: 100 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "35%", right: "15%", rotate: "90deg", size: 115 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "75%", left: "35%", rotate: "-15deg", size: 105 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "85%", right: "25%", rotate: "60deg", size: 110 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "25%", left: "25%", rotate: "180deg", size: 90 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "8%", left: "45%", rotate: "-60deg", size: 95 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "60%", right: "5%", rotate: "20deg", size: 100 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "55%", left: "-2%", rotate: "75deg", size: 120 },
+                        { src: "/unmaad assets/events street/branch2.svg", top: "90%", left: "10%", rotate: "-45deg", size: 85 },
+                        { src: "/unmaad assets/events street/branch1.svg", top: "2%", right: "30%", rotate: "110deg", size: 115 },
+                    ].map((branch, i) => (
+                        <div
+                            key={i}
+                            className="absolute z-0"
+                            style={{
+                                top: branch.top,
+                                left: branch.left,
+                                right: branch.right
+                            }}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 3, duration: 0.5 }}
+                                className="animate-float-rotate" style={{ animationDelay: `${i * 0.2}s` }}>
+                                <Image
+                                    src={branch.src}
+                                    alt="Branch"
+                                    width={branch.size}
+                                    height={branch.size}
+                                    className="object-contain"
+                                    style={{
+                                        width: `${branch.size}px`,
+                                        height: `${branch.size}px`,
+                                        transform: `rotate(${branch.rotate})`,
+                                        opacity: 1
+                                    }}
+                                />
+                            </motion.div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

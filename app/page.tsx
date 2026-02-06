@@ -10,7 +10,6 @@ import Footer from "@/app/components/Footer";
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col font-sans text-white">
-      <Navbar />
       <HeroSection />
       <Street />
       <UnmaadJunction />

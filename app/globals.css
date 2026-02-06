@@ -4,6 +4,24 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 1.5px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e0e0e0;
+}
+
 @layer utilities {
     .font-century-gothic {
         font-family: "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
@@ -62,6 +80,70 @@ html {
             mask-image: conic-gradient(black 360deg, transparent 0deg);
             -webkit-mask-image: conic-gradient(black 360deg, transparent 0deg);
             --wipe-angle: 360deg;
+        }
+    }
+
+    .animate-slide-in-bottom {
+        animation: slideInFromBottom 0.5s ease-out forwards;
+    }
+
+    @keyframes slideInFromBottom {
+        from {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-float-rotate {
+        animation: floatRotate 6s ease-in-out infinite;
+    }
+
+    @keyframes floatRotate {
+
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        50% {
+            transform: translateY(-8px) rotate(3deg);
+        }
+    }
+
+    .animate-leaf-fall {
+        animation: leafFall 3s ease-out forwards;
+    }
+
+    @keyframes leafFall {
+        from {
+            transform: translateY(-800px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-leaf-fall-reverse {
+        animation: leafFallReverse 3s ease-out forwards;
+    }
+
+    @keyframes leafFallReverse {
+        from {
+            transform: translateY(800px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
         }
     }
 }

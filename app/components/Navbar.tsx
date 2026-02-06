@@ -10,14 +10,14 @@ const Navbar = () => {
     const navLinks = [
         { name: "Unmaad Junction", href: "/#unmaad-junction" },
         { name: "Events Street", href: "/pages/events-street" },
-        { name: "Competitions Bazaar", href: "/#competition" },
+        { name: "Competitions Bazaar", href: "/pages/competition-bazaar" },
         { name: "Merch Store", href: "/#merch" },
         { name: "Sponsor Alley", href: "/#sponsor" },
         { name: "Contact Spot", href: "/#contact" },
     ];
 
     return (
-        <nav className="sticky top-0 z-[100] bg-white/10 backdrop-blur-md transition-all duration-300">
+        <nav className="fixed top-0 w-full z-[100] bg-white/10 backdrop-blur-md transition-all duration-300">
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 lg:h-20">
@@ -51,13 +51,13 @@ const Navbar = () => {
 
                     {/* Right: Ticket Button */}
                     <div className="hidden lg:block shrink-0">
-                        <Link href="#tickets">
+                        <Link href="#tickets" className="relative block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
                             <Image
                                 src="/unmaad assets/tic-button.svg"
                                 alt="Get Tickets"
                                 width={120}
                                 height={40}
-                                className="h-8 w-auto object-contain cursor-pointer hover:scale-105 transition-transform"
+                                className="h-8 w-auto object-contain cursor-pointer"
                             />
                         </Link>
                     </div>
@@ -128,13 +128,13 @@ const Navbar = () => {
                         </Link>
                     ))}
                     <div className="mt-6 px-3 flex justify-center">
-                        <Link href="#tickets" onClick={() => setIsOpen(false)}>
+                        <Link href="#tickets" onClick={() => setIsOpen(false)} className="relative block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
                             <Image
                                 src="/unmaad assets/tic-button.svg"
                                 alt="Get Tickets"
                                 width={120}
                                 height={40}
-                                className="h-9 w-auto object-contain cursor-pointer hover:scale-105 transition-transform"
+                                className="h-9 w-auto object-contain cursor-pointer"
                             />
                         </Link>
                     </div>

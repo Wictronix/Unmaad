@@ -2,68 +2,101 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { useRef, useEffect } from "react";
 
-// Define route depth to determine animation direction
-const getRouteDepth = (path: string) => {
-    if (path === "/") return 0;
-    if (path.startsWith("/pages/events-street")) return 1;
-    return 0; // Default
-};
+// Define the order of pages for directional logic
+const pageOrder = [
+    "/",                        // Home: Index 0
+    "/pages/events-street",     // Events Street: Index 1
+    "/pages/competition-bazaar" // Competition Bazaar: Index 2
+];
 
-const variants = {
-    enter: (direction: number) => ({
-        x: direction > 0 ? "100%" : "-100%",
-        opacity: 0,
-    }),
-    center: {
-        x: 0,
-        opacity: 1,
-    },
-    exit: (direction: number) => ({
-        x: direction < 0 ? "100%" : "-100%",
-        opacity: 0,
-    }),
-};
-
-// Hook to track previous path to calculate direction
-import { useRef, useEffect } from 'react';
-
-function usePrevious(value: string) {
-    const ref = useRef(value);
-    useEffect(() => {
-        ref.current = value;
-    });
-    return ref.current;
-}
-
-export default function PageTransition({ children }: { children: ReactNode }) {
+const PageTransition = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
-    const depth = getRouteDepth(pathname);
-    const prevPath = usePrevious(pathname);
-    const prevDepth = getRouteDepth(prevPath);
+    const prevPathname = useRef(pathname);
 
-    // If moving deeper (1 > 0), slide from right (direction 1)
-    // If moving shallower (0 < 1), slide from left (direction -1)
-    const direction = depth - prevDepth;
+    // Scroll to top on route change, but respect hash links
+    useEffect(() => {
+        // Only scroll to top if there's no hash (anchor link)
+        if (!window.location.hash) {
+            window.scrollTo(0, 0);
+        }
+    }, [pathname]);
+
+    // Get indices to determine direction
+    const currentIndex = pageOrder.indexOf(pathname);
+    const prevIndex = pageOrder.indexOf(prevPathname.current);
+
+    // Determine direction: 1 for Right-to-Left (Next), -1 for Left-to-Right (Prev)
+    // If route is not in map (e.g. 404), default to 0 or maintain direction
+    let direction = 0;
+    if (currentIndex !== -1 && prevIndex !== -1 && currentIndex !== prevIndex) {
+        direction = currentIndex > prevIndex ? 1 : -1;
+    }
+
+    // Update ref for next render
+    if (pathname !== prevPathname.current) {
+        prevPathname.current = pathname;
+    }
+
+    // Variants for the animation
+    const variants = {
+        enter: {
+            y: "100%", // Enter from Bottom (offscreen positive Y)
+            x: 0,
+            zIndex: 10,
+            opacity: 1,
+        },
+        center: {
+            y: 0,
+            x: 0,
+            zIndex: 10, // Stay on top
+            opacity: 1,
+        },
+        exit: {
+            y: 0, // Stay static (no movement) acting as background
+            x: 0,
+            zIndex: 0,
+            opacity: 1,
+            transition: { duration: 0.8, ease: "easeInOut" }
+        },
+    };
 
     return (
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
                 key={pathname}
-                custom={direction}
                 variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 transition={{
-                    x: { type: "spring", stiffness: 300, damping: 30 },
-                    opacity: { duration: 0.2 },
+                    y: { type: "tween", ease: "easeInOut", duration: 0.5 }, // Faster (0.5s)
+                    opacity: { duration: 0.5 }
                 }}
-                className="w-full"
+                className="w-full min-h-screen absolute top-0 left-0 bg-[#3033C8]" // Added bg color fallback
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    minHeight: '100vh',
+                    top: 0,
+                    left: 0
+                }}
             >
+                {/*
+                  Add a padding-top equal to Navbar height because Navbar is fixed/sticky in Layout.
+                  However, existing pages might already account for this or have their own containers.
+                  Since we are hoisting Navbar, it will sit *above* this PageTransition.
+                  If Navbar is sticky in Layout, this div starts at top:0 underneath it?
+                  Or if Navbar is in flow?
+                  
+                  Let's assume Navbar is sticky and has z-index.
+                  We need to ensure this container is properly positioned context.
+                */}
                 {children}
             </motion.div>
         </AnimatePresence>
     );
-}
+};
+
+export default PageTransition;

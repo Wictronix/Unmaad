@@ -150,7 +150,7 @@ const HeroSection = () => {
 
                 {/* Action Buttons - Side by side on all screens */}
                 <div className="flex flex-row gap-2 md:gap-7 mt-4 md:mt-12">
-                    <Link href="#get-started" className="relative group block hover:scale-105 transition-transform">
+                    <Link href="#get-started" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
                         <Image
                             src="/unmaad assets/home-button.svg"
                             alt="Book your Spot"
@@ -162,7 +162,7 @@ const HeroSection = () => {
                             Book your Spot
                         </span>
                     </Link>
-                    <Link href="#learn-more" className="relative group block hover:scale-105 transition-transform">
+                    <Link href="#learn-more" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
                         <Image
                             src="/unmaad assets/home-button.svg"
                             alt="Enter the Street"
