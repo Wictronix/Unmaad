@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useRef, useEffect } from "react";
 
@@ -40,7 +40,7 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
     }
 
     // Variants for the animation
-    const variants = {
+    const variants: Variants = {
         enter: {
             y: "100%", // Enter from Bottom (offscreen positive Y)
             x: 0,
