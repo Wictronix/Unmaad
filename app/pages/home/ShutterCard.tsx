@@ -53,7 +53,7 @@ const ShutterCard = ({
 
             {/* Poster (Bottom) - Revealed when shutter opens */}
             <div className="absolute inset-1 z-0 flex items-center justify-center">
-                <div className="w-[calc(80%+10px)] md:w-[80%] h-[55%] -translate-y-[20px] md:-translate-y-0 translate-x-[5px] md:translate-x-0">
+                <div className="w-[calc(80%+10px)] md:w-[80%] h-[50%] translate-y-[8px] md:translate-y-[18px] translate-x-[5px] md:translate-x-0">
                     <Image
                         src={posterImage}
                         alt="Poster"

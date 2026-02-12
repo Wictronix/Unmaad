@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bai_Jamjuree } from 'next/font/google';
 import { useState, useEffect } from "react";
+import HomeButton from "../../components/HomeButton";
 
 const baiJamjuree = Bai_Jamjuree({
     weight: '700',
@@ -55,12 +56,12 @@ const UnmaadJunction = () => {
 
                 {/* Stats */}
                 <p className="text-base md:text-xl text-white mb-2 md:mb-4 font-century-gothic tracking-wider">
-                    5000+ attendees | 50+ events | Since 200X
+                    5000+ attendees | 50+ events | Since 1999
                 </p>
 
                 {/* Description */}
                 <p className="text-xs md:text-sm text-white max-w-2xl mb-6 md:mb-16 font-century-gothic opacity-90">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Where art escapes the walls, culture takes the streets, and every beat tells a story.
                 </p>
 
                 {/* Mandala Container */}
@@ -98,18 +99,12 @@ const UnmaadJunction = () => {
                 </div>
 
                 {/* Button */}
-                <Link href="#shops" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                    <Image
-                        src="/unmaad assets/home-button.svg"
-                        alt="Explore Shops"
-                        width={150}
-                        height={50}
-                        className="w-40 md:w-60 h-auto object-contain"
-                    />
-                    <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-xs md:text-lg font-bold font-century-gothic`}>
-                        Watch Aftermovie
-                    </span>
-                </Link>
+                <HomeButton
+                    href="https://www.youtube.com/watch?v=PfOL_uqhW1o&t=4s"
+                    text="Watch Aftermovie"
+                    imgClassName="w-40 md:w-60 h-auto"
+                    textClassName="text-xs md:text-lg font-bold font-century-gothic"
+                />
 
             </div>
         </section>

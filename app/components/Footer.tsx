@@ -64,13 +64,13 @@ const Footer = () => {
 
                             {/* Social Icons */}
                             <div className="flex gap-4">
-                                <Link href="#" className="text-gray-500 hover:text-[#FF00A8] transition-colors">
+                                <Link href="https://www.instagram.com/unmaad_iimb/" className="text-gray-500 hover:text-[#FF00A8] transition-colors">
                                     <Instagram size={24} />
                                 </Link>
-                                <Link href="#" className="text-gray-500 hover:text-blue-600 transition-colors">
+                                <Link href="https://www.facebook.com/unmaad.iimb/" className="text-gray-500 hover:text-blue-600 transition-colors">
                                     <Facebook size={24} />
                                 </Link>
-                                <Link href="#" className="text-gray-500 hover:text-red-600 transition-colors">
+                                <Link href="https://www.youtube.com/@unmaad_iimb" className="text-gray-500 hover:text-red-600 transition-colors">
                                     <Youtube size={24} />
                                 </Link>
                             </div>

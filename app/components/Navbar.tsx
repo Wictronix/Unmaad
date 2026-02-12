@@ -3,17 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import HomeButton from "./HomeButton";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
         { name: "Unmaad Junction", href: "/#unmaad-junction" },
-        { name: "Events Street", href: "/pages/events-street" },
         { name: "Competition Bazaar", href: "/pages/competition-bazaar" },
-        { name: "Merch Store", href: "/#merch" },
-        { name: "Sponsor Alley", href: "/#sponsor" },
-        { name: "Contact Spot", href: "/#contact" },
     ];
 
     return (
@@ -51,15 +48,13 @@ const Navbar = () => {
 
                     {/* Right: Ticket Button */}
                     <div className="hidden lg:block shrink-0">
-                        <Link href="#tickets" className="relative block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                            <Image
-                                src="/unmaad assets/tic-button.svg"
-                                alt="Get Tickets"
-                                width={120}
-                                height={40}
-                                className="h-8 w-auto object-contain cursor-pointer"
-                            />
-                        </Link>
+                        <HomeButton
+                            href="https://www.skillboxes.com/events/seedhe-maut-unmaad-iim-s-annual-cultural-fest"
+                            imageSrc="/unmaad assets/tic-button.svg"
+                            imgClassName="h-8 w-auto"
+                            imgWidth={120}
+                            imgHeight={40}
+                        />
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -128,15 +123,14 @@ const Navbar = () => {
                         </Link>
                     ))}
                     <div className="mt-6 px-3 flex justify-center">
-                        <Link href="#tickets" onClick={() => setIsOpen(false)} className="relative block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                            <Image
-                                src="/unmaad assets/tic-button.svg"
-                                alt="Get Tickets"
-                                width={120}
-                                height={40}
-                                className="h-9 w-auto object-contain cursor-pointer"
-                            />
-                        </Link>
+                        <HomeButton
+                            href="https://www.skillboxes.com/events/seedhe-maut-unmaad-iim-s-annual-cultural-fest"
+                            imageSrc="/unmaad assets/tic-button.svg"
+                            imgClassName="h-8 w-auto"
+                            imgWidth={120}
+                            imgHeight={40}
+                            onClick={() => setIsOpen(false)}
+                        />
                     </div>
                 </div>
             </div>

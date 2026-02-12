@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Bai_Jamjuree } from 'next/font/google';
 import { motion } from "framer-motion";
+import HomeButton from "../../components/HomeButton";
 
 const baiJamjuree = Bai_Jamjuree({
     weight: '700',
@@ -182,18 +183,15 @@ const EventsStreet = () => {
                                     </>
                                 )}
 
-                                <div className="relative group cursor-pointer rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                                    <Image
-                                        src="/unmaad assets/events street/purple-button.svg"
-                                        alt={text}
-                                        width={250}
-                                        height={90}
-                                        className="w-64 sm:w-60 md:w-60 lg:w-80 h-auto object-contain"
-                                    />
-                                    <span className={`absolute inset-0 flex items-center justify-center text-white text-xs md:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className}`}>
-                                        {text}
-                                    </span>
-                                </div>
+                                <HomeButton
+                                    text={text}
+                                    imageSrc="/unmaad assets/events street/purple-button.svg"
+                                    imgWidth={250}
+                                    imgHeight={90}
+                                    imgClassName="w-64 sm:w-60 md:w-60 lg:w-80 h-auto"
+                                    textClassName={`text-xs md:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className} text-white`}
+                                    shadowColor="white"
+                                />
                             </div>
                         ))}
                     </div>
@@ -229,17 +227,25 @@ const EventsStreet = () => {
                     </div>
 
                     {/* Book Your Spot Button */}
-                    <div className="relative group cursor-pointer block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)] mt-8">
-                        <Image
-                            src="/unmaad assets/home-button.svg"
-                            alt="Book your spot"
-                            width={200}
-                            height={70}
-                            className="w-40 md:w-60 h-auto object-contain"
+                    <div className="mt-8">
+                        <HomeButton
+                            href="#" // Was not specified in original code, it was just a div wrapper around Image, but HomeButton uses Link. The original code was a div with NO Link around it? 
+                            // Wait, let me check the original code in EventsStreet.tsx again.
+                            // Lines 232: <div className="relative group cursor-pointer block ...">
+                            // It was NOT a Link. It was a div.
+                            // My HomeButton uses Link.
+                            // I should probably pass '#' if it's just visual or check if I need to support onClick/div.
+                            // The original had `active:scale-95` so it was interactive.
+                            // But no href.
+                            // I will use href="#" for now or should I allow "as='div'"?
+                            // HomeButton is strictly Link.
+                            // I'll use href="#" and maybe onClick if needed (none was there).
+                            // Actually, line 232 says `cursor-pointer block`. It likely was intended to be a button or link but missing href.
+                            // I'll set href="#" to maintain behavior of "clickable-like". 
+                            text="Book your spot"
+                            imgClassName="w-40 md:w-60 h-auto"
+                            textClassName={`text-xs md:text-lg font-bold text-center px-4 uppercase ${baiJamjuree.className}`}
                         />
-                        <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-xs md:text-lg font-bold text-center px-4 uppercase ${baiJamjuree.className}`}>
-                            Book your spot
-                        </span>
                     </div>
 
                 </div>

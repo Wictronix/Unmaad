@@ -3,16 +3,164 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Bai_Jamjuree } from 'next/font/google';
+import HomeButton from "../../components/HomeButton";
 
 const baiJamjuree = Bai_Jamjuree({
     weight: '700',
     subsets: ['latin'],
 });
 
+const danceTitles = [
+    { title: "Foottloose", link: "https://unstop.com/events/footloose-group-dance-competition-unmaad-2026-iim-bangalore-1625340", image: "/unmaad assets/competition bazaar/comps/Footloose.jpg" },
+    { title: "Echoes of Heritage", link: "https://unstop.com/events/echoes-of-heritage-group-classical-folk-dance-unmaad-2026-iim-bangalore-1625333", image: "/unmaad assets/competition bazaar/comps/Echoes of heritage.JPG" },
+    { title: "Soul N Sync", link: "https://unstop.com/events/soul-nsync-solo-duet-dance-unmaad-2026-iim-bangalore-1625318", image: "/unmaad assets/competition bazaar/comps/SoulnSync.jpg" },
+    { title: "Street Unleashed", link: "https://unstop.com/events/street-unleashed-dance-battle-face-off-unmaad-2026-iim-bangalore-1625341", image: "/unmaad assets/competition bazaar/comps/Street Unleashed.jpg" }
+];
+
+const musicTitles = [
+    { title: "Voice of Unmaad", link: "https://unstop.com/events/voice-of-unmaad-solo-singing-unmaad-2026-iim-bangalore-1625461", image: "/unmaad assets/competition bazaar/comps/voiceofunmaad.JPG" },
+    { title: "Gully Rap", link: "https://unstop.com/events/rap-sody-solo-rap-event-unmaad-2026-iim-bangalore-1625508", image: "/unmaad assets/competition bazaar/comps/gullyrap.jpg" },
+    { title: "Battle of Bands", link: "https://unstop.com/events/b-school-of-rock-battle-of-bands-unmaad-2026-iim-bangalore-1625518", image: "/unmaad assets/competition bazaar/comps/battleofbands.jpg" }
+];
+
+const dramaTitles = [
+    { title: "Aahwan", link: "https://unstop.com/events/aahwan-the-street-play-unmaad-2026-iim-bangalore-1625715", image: "/unmaad assets/competition bazaar/comps/aahwan.jpg" },
+    { title: "Drishya", link: "https://unstop.com/events/drishya-short-film-competition-unmaad-2026-iim-bangalore-1625781", image: "/unmaad assets/competition bazaar/comps/drishya.jpg" },
+    { title: "Spotlight", link: "https://unstop.com/events/spotlight-mono-acting-competition-unmaad-2026-iim-bangalore-1625812", image: "/unmaad assets/competition bazaar/comps/spotlight.jpg" },
+    { title: "Curtain Call", link: "https://unstop.com/events/curtain-call-stage-play-event-unmaad-2026-iim-bangalore-1625713", image: "/unmaad assets/competition bazaar/comps/curtaincall.jpg" }
+];
+
+const informalsTitles = [
+    { title: "Food Wars", link: "https://unstop.com/events/food-wars-khao-toh-jaane-unmaad-2026-iim-bangalore-1625483", image: "/unmaad assets/competition bazaar/comps/foodwars.jpg" },
+    { title: "Treasure Hunt", link: "https://unstop.com/events/treasure-hunt-kho-gaye-hum-kahan-unmaad-2026-iim-bangalore-1625251", image: "/unmaad assets/competition bazaar/comps/treasurehunt.jpg" },
+    { title: "Mr. & Ms. Unmaad", link: "https://unstop.com/events/mr-ms-unmaad-unmaad-2026-iim-bangalore-1625492", image: "/unmaad assets/competition bazaar/comps/mrandmsunmaad.jpg" },
+    { title: "Mic Drop", link: "https://unstop.com/events/mic-drop-humor-us-we-dare-you-unmaad-2026-iim-bangalore-1625449", image: "/unmaad assets/competition bazaar/comps/micdrop.jpg" }
+];
+
+const fashionTitles = [
+    { title: "Haute Couture", link: "https://unstop.com/events/haute-couture-indias-biggest-b-school-fashion-show-unmaad-2026-iim-bangalore-1624726", image: "/unmaad assets/competition bazaar/comps/hautecouture.jpg" },
+    { title: "Cosplay", link: "https://unstop.com/events/metamorph-a-cosplay-event-unmaad-2026-iim-bangalore-1625008", image: "/unmaad assets/competition bazaar/comps/cosplay.jpg" },
+    { title: "Group Canvas", link: "https://unstop.com/events/canvas-collective-group-painting-event-unmaad-2026-iim-bangalore-1624991", image: "/unmaad assets/competition bazaar/comps/groupcanvas.jpg" },
+    { title: "Photography", link: "https://unstop.com/events/frames-of-streets-photography-event-unmaad-2026-iim-bangalore-1624994", image: "/unmaad assets/competition bazaar/comps/photography.jpg" },
+    { title: "Junk art", link: "https://unstop.com/events/beauty-in-the-broken-a-junk-art-event-unmaad-2026-iim-bangalore-1625030", image: "/unmaad assets/competition bazaar/comps/junkart.jpg" }
+];
+
+const litsTitles = [
+    { title: "Shabdsaga", link: "https://unstop.com/events/shabd-saga-a-hindi-and-urdu-poetry-competition-unmaad-2026-iim-bangalore-1625309", image: "/unmaad assets/competition bazaar/comps/shabdsaga.jpg" },
+    { title: "Just a Minute (JAM)", link: "https://unstop.com/p/just-a-minute-60-second-spotlight-unmaad-2026-iim-bangalore-1625265", image: "/unmaad assets/competition bazaar/comps/Jam.jpg" },
+    { title: "Unmaad Quiz", link: "https://unstop.com/events/the-unmaad-quiz-general-open-quiz-unmaad-2026-iim-bangalore-1625490", image: "/unmaad assets/competition bazaar/comps/unmaadquiz.jpg" },
+    { title: "Pop Culture Quiz", link: "https://unstop.com/events/once-upon-a-time-in-pop-culture-entertainment-quiz-unmaad-2026-iim-bangalore-1625503", image: "/unmaad assets/competition bazaar/comps/popculture.jpg" }
+];
+
+const onlineTitles = [
+    { title: "Virtual Expedition", link: "https://unstop.com/events/virtual-expedition-unmaad-2026-iim-bangalore-1625394", image: "/unmaad assets/competition bazaar/comps/virtualexpedition.jpg" },
+    { title: "Street Anthem Challenge", link: "https://unstop.com/events/street-anthem-challenge-unmaad-2026-iim-bangalore-1625186", image: "/unmaad assets/competition bazaar/comps/streetanthem.jpg" }
+];
+
+interface CardFrameProps {
+    className?: string;
+    style?: React.CSSProperties;
+    title?: string | null;
+    link?: string;
+    image?: string;
+    decoration?: 'deco1' | 'deco2' | null;
+    flipDecoration?: boolean;
+}
+
+const CardFrame = ({ className, style, title, link, image, decoration, flipDecoration }: CardFrameProps) => {
+    const handleClick = () => {
+        if (link) {
+            window.open(link, '_blank');
+        }
+    };
+
+    return (
+        <div
+            className={`relative ${className?.includes('absolute') ? '' : 'relative'} ${link ? 'cursor-pointer' : ''} ${className || ''}`}
+            onClick={handleClick}
+            style={style}
+        >
+            <Image
+                src="/unmaad assets/competition bazaar/wind.svg"
+                alt="Frame"
+                width={210}
+                height={210}
+                className="w-full h-full object-contain"
+            />
+            {image && (
+                <div
+                    className={`absolute top-[calc(50%+22px)] md:top-[calc(50%+31px)] lg:top-[calc(50%+38px)] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] z-30 pointer-events-none ${className?.includes('invisible') ? 'hidden' : ''}`}
+                    style={{ clipPath: 'inset(26% 22% 26% 22%)' }}
+                >
+                    <Image
+                        src={image}
+                        alt={title || "Card Image"}
+                        fill
+                        className="object-cover"
+                    />
+                </div>
+            )}
+            {title && (
+                <div
+                    className={`absolute top-[calc(12%-5px)] left-1/2 -translate-x-1/2 w-[70%] text-center z-40 pointer-events-none ${className?.includes('invisible') ? 'hidden' : ''}`}
+                >
+                    <span className={`${baiJamjuree.className} text-black font-bold uppercase leading-tight block`} style={{ fontSize: 'clamp(8px, 1.2vw, 14px)' }}>
+                        {title}
+                    </span>
+                </div>
+            )}
+            {decoration === 'deco1' && (
+                <Image
+                    src="/unmaad assets/competition bazaar/frame-deco1.svg"
+                    alt="Frame Decoration"
+                    width={150}
+                    height={70}
+                    className={`absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[85%] h-auto z-40 object-contain pointer-events-none transition-transform duration-300 ${flipDecoration ? '-ml-2 md:-ml-4 scale-x-[-1]' : ''}`}
+                // Note: Hover state was complex to replicate inside here without more state or specific parent classes, 
+                // but usually the interaction was on the frame. If the frame scales, this absolute child scales with it if contained?
+                // Actually previous code had them separate but sibling. 
+                // Let's keep it simple: if the parent (this div) scales, everything inside scales.
+                // The previous code scaled the *Image* (wind.svg) on hover, and the deco separately.
+                // To keep the exact effect, we might need the hover on the parent div to affect children.
+                // Tailwind group-hover? Yes, let's add group to container.
+                />
+            )}
+            {decoration === 'deco2' && (
+                <Image
+                    src="/unmaad assets/competition bazaar/frame-deco2.svg"
+                    alt="Frame Decoration 2"
+                    width={150}
+                    height={70}
+                    className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[38%] h-auto z-40 object-contain pointer-events-none"
+                />
+            )}
+        </div>
+    );
+};
+
 const CompetitionBazaar = () => {
     const [activeTab, setActiveTab] = useState<string | null>("Dance");
     const [scrollOffset, setScrollOffset] = useState(0);
     const sectionRef = useRef<HTMLElement>(null);
+
+    const getCardData = (index: number) => {
+        if (activeTab === "Dance" && index < danceTitles.length) {
+            return danceTitles[index];
+        } else if (activeTab === "Music" && index < musicTitles.length) {
+            return musicTitles[index];
+        } else if (activeTab === "Dramas" && index < dramaTitles.length) {
+            return dramaTitles[index];
+        } else if (activeTab === "Informals" && index < informalsTitles.length) {
+            return informalsTitles[index];
+        } else if (activeTab === "Fashion & Fine arts" && index < fashionTitles.length) {
+            return fashionTitles[index];
+        } else if (activeTab === "Lits & Quizzes" && index < litsTitles.length) {
+            return litsTitles[index];
+        } else if (activeTab === "Online" && index < onlineTitles.length) {
+            return onlineTitles[index];
+        }
+        return { title: null, link: undefined, image: undefined };
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -103,27 +251,25 @@ const CompetitionBazaar = () => {
                 {/* Content Area */}
                 <div className="relative z-20 flex-grow flex flex-col items-center justify-center py-10 px-4">
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10 max-w-6xl">
-                        {["Dance", "Dramas", "Music", "Informals", "Fashion & Fine arts", "Lits & Quizzes"].map((text, index) => (
+                        {["Dance", "Dramas", "Music", "Informals", "Fashion & Fine arts", "Lits & Quizzes", "Online"].map((text, index) => (
                             <div
                                 key={index}
-                                className="relative group cursor-pointer flex justify-center rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]"
-                                onClick={() => setActiveTab(text)}
+                                className={`relative flex justify-center ${index === 6 ? 'col-span-2 lg:col-span-3' : ''}`}
                             >
-                                <div className="relative">
-                                    <Image
-                                        src={activeTab === text
-                                            ? "/unmaad assets/competition bazaar/yellow-button.svg"
-                                            : "/unmaad assets/events street/purple-button.svg"
-                                        }
-                                        alt={text}
-                                        width={250}
-                                        height={90}
-                                        className="w-40 md:w-60 h-auto object-contain"
-                                    />
-                                    <span className={`absolute inset-0 flex items-center justify-center text-[10px] md:text-base font-bold text-center px-6 uppercase ${baiJamjuree.className} leading-tight ${activeTab === text ? 'text-black' : 'text-white'}`}>
-                                        {text}
-                                    </span>
-                                </div>
+                                <HomeButton
+                                    text={text}
+                                    imageSrc={activeTab === text
+                                        ? "/unmaad assets/competition bazaar/yellow-button.svg"
+                                        : "/unmaad assets/events street/purple-button.svg"
+                                    }
+                                    imgWidth={250}
+                                    imgHeight={90}
+                                    imgClassName="w-40 md:w-60 h-auto"
+                                    textClassName={`text-[10px] md:text-base font-bold text-center px-6 uppercase ${baiJamjuree.className} leading-tight ${activeTab === text ? 'text-black' : 'text-white'}`}
+                                    shadowColor={activeTab === text ? "black" : "white"}
+                                    shadowClassName={activeTab === text ? "hidden" : undefined}
+                                    onClick={() => setActiveTab(text)}
+                                />
                             </div>
                         ))}
                     </div>
@@ -133,22 +279,15 @@ const CompetitionBazaar = () => {
                         {/* Row 1 */}
                         <div className="relative flex justify-center gap-14 md:gap-36 w-full">
                             {/* Middle Frame */}
-                            <div className="absolute bottom-[40px] left-1/2 -translate-x-1/2 z-20 translate-y-[15%]">
-                                <Image
+                            <div className="absolute bottom-[40px] left-1/2 -translate-x-1/2 z-20 translate-y-[15%] group">
+                                <CardFrame
                                     key={activeTab}
-                                    src="/unmaad assets/competition bazaar/frame.svg"
-                                    alt="Frame"
-                                    width={210}
-                                    height={210}
-                                    className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
-                                    style={{ animationDelay: '0.1s' }} // Middle Frame Row 1 (Visual Order 2nd)
-                                />
-                                <Image
-                                    src="/unmaad assets/competition bazaar/frame-deco2.svg"
-                                    alt="Frame Decoration 2"
-                                    width={150}
-                                    height={70}
-                                    className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[38%] h-auto object-contain pointer-events-none hover:scale-105 transition-transform duration-300"
+                                    title={getCardData(1).title} // Echoes
+                                    link={getCardData(1).link}
+                                    image={getCardData(1).image}
+                                    decoration="deco2"
+                                    className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
+                                    style={{ animationDelay: '0.1s' }}
                                 />
                             </div>
 
@@ -162,22 +301,16 @@ const CompetitionBazaar = () => {
                                         className="w-72 md:w-[30rem] h-auto object-contain relative z-10"
                                     />
                                     {/* Building Frame */}
-                                    <div className="absolute bottom-[40px] z-20 translate-y-[15%]">
-                                        <Image
+                                    <div className={`absolute bottom-[40px] z-20 translate-y-[15%] group ${activeTab === 'Online' && i === 2 ? 'invisible' : ''}`}>
+                                        <CardFrame
                                             key={activeTab}
-                                            src="/unmaad assets/competition bazaar/frame.svg"
-                                            alt="Frame"
-                                            width={210}
-                                            height={210}
-                                            className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
-                                            style={{ animationDelay: i === 1 ? '0s' : '0.2s' }} // i=1 (Left, 1st), i=2 (Right, 3rd)
-                                        />
-                                        <Image
-                                            src="/unmaad assets/competition bazaar/frame-deco1.svg"
-                                            alt="Frame Decoration"
-                                            width={150}
-                                            height={70}
-                                            className={`absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[85%] h-auto object-contain pointer-events-none transition-transform duration-300 ${i === 2 ? '-ml-2 md:-ml-4 scale-x-[-1] hover:scale-x-[-1.05] hover:scale-y-[1.05]' : 'hover:scale-105'}`}
+                                            title={i === 1 ? getCardData(0).title : getCardData(2).title}
+                                            link={i === 1 ? getCardData(0).link : getCardData(2).link}
+                                            image={i === 1 ? getCardData(0).image : getCardData(2).image}
+                                            decoration="deco1"
+                                            flipDecoration={i === 2}
+                                            className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
+                                            style={{ animationDelay: i === 1 ? '0s' : '0.2s' }}
                                         />
                                     </div>
                                 </div>
@@ -216,24 +349,17 @@ const CompetitionBazaar = () => {
                         </div>
 
                         {/* Row 2 */}
-                        <div className="relative flex justify-center gap-14 md:gap-36 w-full">
+                        <div className={`relative flex justify-center gap-14 md:gap-36 w-full ${activeTab === 'Music' || activeTab === 'Online' ? 'hidden' : ''}`}>
                             {/* Middle Frame */}
-                            <div className="absolute bottom-[40px] left-1/2 -translate-x-1/2 z-20 translate-y-[15%]">
-                                <Image
+                            <div className="absolute bottom-[40px] left-1/2 -translate-x-1/2 z-20 translate-y-[15%] group">
+                                <CardFrame
                                     key={activeTab}
-                                    src="/unmaad assets/competition bazaar/frame.svg"
-                                    alt="Frame"
-                                    width={210}
-                                    height={210}
-                                    className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
-                                    style={{ animationDelay: '0.4s' }} // Middle Frame Row 2 (Visual Order 5th)
-                                />
-                                <Image
-                                    src="/unmaad assets/competition bazaar/frame-deco2.svg"
-                                    alt="Frame Decoration 2"
-                                    width={150}
-                                    height={70}
-                                    className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[38%] h-auto object-contain pointer-events-none hover:scale-105 transition-transform duration-300"
+                                    title={getCardData(3).title}
+                                    link={getCardData(3).link}
+                                    image={getCardData(3).image}
+                                    decoration="deco2"
+                                    className="w-[9.5rem] md:w-[19.1rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
+                                    style={{ animationDelay: '0.4s' }}
                                 />
                             </div>
 
@@ -247,15 +373,15 @@ const CompetitionBazaar = () => {
                                         className="w-72 md:w-[30rem] h-auto object-contain relative z-10"
                                     />
                                     {/* Building Frame */}
-                                    <div className="absolute bottom-[40px] z-20 translate-y-[15%]">
-                                        <Image
+                                    <div className={`absolute bottom-[40px] z-20 translate-y-[15%] ${(['Dance', 'Dramas', 'Informals', 'Lits & Quizzes'].includes(activeTab || '')) || (activeTab === 'Fashion & Fine arts' && i !== 1) ? 'hidden' : ''
+                                        }`}>
+                                        <CardFrame
                                             key={activeTab}
-                                            src="/unmaad assets/competition bazaar/frame.svg"
-                                            alt="Frame"
-                                            width={210}
-                                            height={210}
+                                            title={activeTab === 'Fashion & Fine arts' && i === 1 ? getCardData(4).title : null}
+                                            link={activeTab === 'Fashion & Fine arts' && i === 1 ? getCardData(4).link : undefined}
+                                            image={activeTab === 'Fashion & Fine arts' && i === 1 ? getCardData(4).image : undefined}
                                             className={`w-[9.5rem] md:w-[19.1rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom ${i === 2 ? 'invisible' : ''}`}
-                                            style={{ animationDelay: i === 1 ? '0.3s' : '0.5s' }} // i=1 (Left, 4th), i=2 (Right, 6th)
+                                            style={{ animationDelay: i === 1 ? '0.3s' : '0.5s' }}
                                         />
                                         <Image
                                             src="/unmaad assets/competition bazaar/frame-deco1.svg"
@@ -296,14 +422,13 @@ const CompetitionBazaar = () => {
                                     height={400}
                                     className="w-[33rem] md:w-[20rem] h-auto object-contain relative z-10"
                                 />
-                                <div className="absolute bottom-[20px] md:bottom-[40px] z-20 translate-y-[15%]">
-                                    <Image
+                                <div className="absolute bottom-[20px] md:bottom-[40px] z-20 translate-y-[15%] group">
+                                    <CardFrame
                                         key={activeTab}
-                                        src="/unmaad assets/competition bazaar/frame.svg"
-                                        alt="Frame"
-                                        width={210}
-                                        height={210}
-                                        className="w-[10.8rem] md:w-[13rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
+                                        title={getCardData(0).title}
+                                        link={getCardData(0).link}
+                                        image={getCardData(0).image}
+                                        className="w-[9.7rem] md:w-[13rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
                                         style={{ animationDelay: '0s' }}
                                     />
                                 </div>
@@ -311,22 +436,15 @@ const CompetitionBazaar = () => {
 
                             {/* Frame 2 (+ Deco 2) */}
                             <div className="relative flex justify-center items-end pb-[20px] md:pb-[40px]">
-                                <div className="relative z-20 translate-y-[15%]">
-                                    <Image
+                                <div className="relative z-20 translate-y-[15%] group">
+                                    <CardFrame
                                         key={activeTab}
-                                        src="/unmaad assets/competition bazaar/frame.svg"
-                                        alt="Frame"
-                                        width={210}
-                                        height={210}
-                                        className="w-[10.8rem] md:w-[13rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
+                                        title={getCardData(1).title}
+                                        link={getCardData(1).link}
+                                        image={getCardData(1).image}
+                                        decoration="deco2"
+                                        className="w-[9.7rem] md:w-[13rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
                                         style={{ animationDelay: '0.1s' }}
-                                    />
-                                    <Image
-                                        src="/unmaad assets/competition bazaar/frame-deco2.svg"
-                                        alt="Frame Decoration"
-                                        width={150}
-                                        height={70}
-                                        className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[38%] h-auto object-contain pointer-events-none hover:scale-105 transition-transform duration-300"
                                     />
                                     {/* Static Cart - Bottom Right, moving right -> Parallax Moving Left */}
                                     <div
@@ -346,22 +464,16 @@ const CompetitionBazaar = () => {
 
                             {/* Frame 3 (+ Deco 1) */}
                             <div className="relative flex justify-center items-end pb-[20px] md:pb-[40px]">
-                                <div className="relative z-20 translate-y-[15%]">
-                                    <Image
+                                <div className="relative z-20 translate-y-[15%] group">
+                                    <CardFrame
                                         key={activeTab}
-                                        src="/unmaad assets/competition bazaar/frame.svg"
-                                        alt="Frame"
-                                        width={210}
-                                        height={210}
-                                        className="w-[10.8rem] md:w-[13rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
+                                        title={getCardData(2).title}
+                                        link={getCardData(2).link}
+                                        image={getCardData(2).image}
+                                        decoration="deco1"
+                                        flipDecoration={true}
+                                        className="w-[9.7rem] md:w-[13rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
                                         style={{ animationDelay: '0.2s' }}
-                                    />
-                                    <Image
-                                        src="/unmaad assets/competition bazaar/frame-deco1.svg"
-                                        alt="Frame Decoration"
-                                        width={150}
-                                        height={70}
-                                        className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[85%] h-auto object-contain pointer-events-none transition-transform duration-300 -ml-2 scale-x-[-1] hover:scale-x-[-1.05] hover:scale-y-[1.05]"
                                     />
                                     {/* Static Blue Cart - Bottom Left, moving left -> Parallax Moving Right */}
                                     <div
@@ -380,7 +492,7 @@ const CompetitionBazaar = () => {
                             </div>
 
                             {/* Frame 4 (With Building) */}
-                            <div className="relative flex justify-center items-end">
+                            <div className={`relative flex justify-center items-end ${activeTab === 'Music' ? 'hidden' : ''}`}>
                                 <Image
                                     src="/unmaad assets/competition bazaar/building.svg"
                                     alt="Building"
@@ -388,14 +500,13 @@ const CompetitionBazaar = () => {
                                     height={400}
                                     className="w-[22rem] md:w-[20rem] h-auto object-contain relative z-10"
                                 />
-                                <div className="absolute bottom-[20px] md:bottom-[40px] z-20 translate-y-[15%]">
-                                    <Image
+                                <div className="absolute bottom-[20px] md:bottom-[40px] z-20 translate-y-[15%] group">
+                                    <CardFrame
                                         key={activeTab}
-                                        src="/unmaad assets/competition bazaar/frame.svg"
-                                        alt="Frame"
-                                        width={210}
-                                        height={210}
-                                        className="w-[10.8rem] md:w-[13rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
+                                        title={getCardData(3).title}
+                                        link={getCardData(3).link}
+                                        image={getCardData(3).image}
+                                        className="w-[9.7rem] md:w-[13rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
                                         style={{ animationDelay: '0.3s' }}
                                     />
                                 </div>
@@ -403,41 +514,35 @@ const CompetitionBazaar = () => {
                         </div>
 
                         {/* Frame 5 (Centered + Deco 2) */}
-                        <div className="relative flex justify-center mt-[2px] md:-mt-[6px]">
-                            <div className="relative z-20">
-                                <Image
-                                    key={activeTab}
-                                    src="/unmaad assets/competition bazaar/frame.svg"
-                                    alt="Frame"
-                                    width={210}
-                                    height={210}
-                                    className="w-[10.8rem] md:w-[13rem] h-auto object-contain hover:scale-105 transition-transform duration-300 cursor-pointer animate-slide-in-bottom"
-                                    style={{ animationDelay: '0.4s' }}
-                                />
-                                <Image
-                                    src="/unmaad assets/competition bazaar/frame-deco2.svg"
-                                    alt="Frame Decoration"
-                                    width={150}
-                                    height={70}
-                                    className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[38%] h-auto object-contain pointer-events-none hover:scale-105 transition-transform duration-300"
-                                />
+                        {activeTab !== 'Dance' && activeTab !== 'Music' && activeTab !== 'Dramas' && activeTab !== 'Informals' && activeTab !== 'Lits & Quizzes' && activeTab !== 'Online' && (
+                            <div className="relative flex justify-center mt-[2px] md:-mt-[6px] md:hidden">
+                                <div className="relative z-20 group">
+                                    <CardFrame
+                                        key={activeTab}
+                                        title={getCardData(4).title}
+                                        link={getCardData(4).link}
+                                        image={getCardData(4).image}
+                                        decoration="deco2"
+                                        className="w-[9.7rem] md:w-[13rem] h-auto object-contain transition-transform duration-300 group-hover:scale-105 cursor-pointer animate-slide-in-bottom"
+                                        style={{ animationDelay: '0.4s' }}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* Enter the Street Button */}
-                    <div className="relative group cursor-pointer block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)] mt-4 md:mt-8 lg:mt-12">
-                        <Image
-                            src="/unmaad assets/home-button.svg"
-                            alt="Enter the street"
-                            width={200}
-                            height={70}
-                            className="w-40 md:w-56 lg:w-72 h-auto object-contain"
-                        />
-                        <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-[10px] md:text-sm lg:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className}`}>
-                            Enter the street
-                        </span>
-                    </div>
+                    <HomeButton
+                        className="mt-4 md:mt-8 lg:mt-12 drop-shadow-xl"
+                        text="Enter the street"
+                        imageSrc="/unmaad assets/home-button.svg"
+                        imgWidth={200}
+                        imgHeight={70}
+                        imgClassName="w-40 md:w-56 lg:w-72 h-auto"
+                        textClassName={`text-[10px] md:text-sm lg:text-xl font-bold text-center px-4 uppercase ${baiJamjuree.className} text-[#FF00A8]`}
+                        shadowColor="black"
+                        onClick={() => { }} // Optional: handle click if needed
+                    />
                 </div>
 
                 {/* Bottom Strip */}

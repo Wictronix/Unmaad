@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HomeButton from "../../components/HomeButton";
 import { Bai_Jamjuree } from 'next/font/google';
 
 const baiJamjuree = Bai_Jamjuree({
@@ -150,30 +151,18 @@ const HeroSection = () => {
 
                 {/* Action Buttons - Side by side on all screens */}
                 <div className="flex flex-row gap-2 md:gap-7 mt-4 md:mt-12">
-                    <Link href="#get-started" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                        <Image
-                            src="/unmaad assets/home-button.svg"
-                            alt="Book your Spot"
-                            width={150}
-                            height={50}
-                            className="w-32 md:w-60 h-auto object-contain"
-                        />
-                        <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-[10px] md:text-lg font-bold ${baiJamjuree.className}`}>
-                            Book your Spot
-                        </span>
-                    </Link>
-                    <Link href="#learn-more" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                        <Image
-                            src="/unmaad assets/home-button.svg"
-                            alt="Enter the Street"
-                            width={150}
-                            height={50}
-                            className="w-32 md:w-60 h-auto object-contain"
-                        />
-                        <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-[10px] md:text-lg font-bold ${baiJamjuree.className}`}>
-                            Enter the Street
-                        </span>
-                    </Link>
+                    <HomeButton
+                        href="https://www.skillboxes.com/events/seedhe-maut-unmaad-iim-s-annual-cultural-fest"
+                        text="Book your Spot"
+                        imgClassName="w-32 md:w-60 h-auto"
+                        textClassName={`text-[10px] md:text-lg font-bold ${baiJamjuree.className}`}
+                    />
+                    <HomeButton
+                        href="/pages/competition-bazaar"
+                        text="Enter the Street"
+                        imgClassName="w-32 md:w-60 h-auto"
+                        textClassName={`text-[10px] md:text-lg font-bold ${baiJamjuree.className}`}
+                    />
                 </div>
             </div>
         </section>

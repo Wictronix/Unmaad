@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bai_Jamjuree } from 'next/font/google';
 import { useState, useEffect, useRef } from "react";
+import HomeButton from "../../components/HomeButton";
 
 const baiJamjuree = Bai_Jamjuree({
     weight: '700',
@@ -55,22 +56,26 @@ const Street = () => {
             {/* 1. Orange Theme Section (Fluid Content) */}
             <div className="relative w-full overflow-hidden">
                 {/* Background Image: Orange */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/unmaad assets/hero page/orange-bg.png"
-                        alt="Orange Background"
-                        fill
-                        className="object-cover"
+                {/* Background Image: Orange */}
+                <div className="absolute inset-0 z-0 bg-[#E68D3F]">
+                    <div
+                        className="absolute inset-0 z-0"
+                        style={{
+                            backgroundImage: "url('/unmaad assets/hero page/orange-bg.svg')",
+                            backgroundRepeat: "repeat",
+                            backgroundSize: "100% auto", // Fills width, maintains ratio, repeats vertically
+                            backgroundPosition: "top center"
+                        }}
                     />
                     {/* Pattern Overlay */}
-                    <div className="absolute inset-0 z-10 opacity-50 pointer-events-none">
-                        <Image
-                            src="/unmaad assets/pattern.svg"
-                            alt="Pattern Overlay"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
+                    <div
+                        className="absolute inset-0 z-10 opacity-50 pointer-events-none"
+                        style={{
+                            backgroundImage: "url('/unmaad assets/pattern.svg')",
+                            backgroundRepeat: "repeat",
+                            backgroundSize: "auto"
+                        }}
+                    />
                 </div>
 
                 {/* Content Layer (Relative to wrap in document flow) */}
@@ -84,30 +89,24 @@ const Street = () => {
 
                     {/* Button */}
                     <div className="flex justify-center mb-12 md:mb-16">
-                        <Link href="#explore" className="relative group block rounded-full transition-all duration-150 ease-out active:scale-95 active:translate-x-1 active:translate-y-1 drop-shadow-xl active:drop-shadow-none active:shadow-[inset_0px_0px_15px_4px_rgba(0,0,0,0.4)]">
-                            <Image
-                                src="/unmaad assets/home-button.svg"
-                                alt="Explore all event"
-                                width={150}
-                                height={50}
-                                className="w-40 md:w-60 h-auto object-contain"
-                            />
-                            <span className={`absolute inset-0 flex items-center justify-center text-[#FF00A8] text-sm md:text-2xl font-bold ${baiJamjuree.className}`}>
-                                Explore all event
-                            </span>
-                        </Link>
+                        <HomeButton
+                            href="/pages/competition-bazaar"
+                            text="Explore all event"
+                            imgClassName="w-40 md:w-60 h-auto"
+                            textClassName={`text-sm md:text-2xl font-bold ${baiJamjuree.className}`}
+                        />
                     </div>
 
                     {/* Shutters (Base rests on the bottom of this container) */}
                     <div className="flex flex-col md:grid md:grid-cols-2 md:place-items-center lg:flex lg:flex-row items-end justify-center gap-10 md:gap-y-10 md:gap-x-4 lg:gap-15 z-30 transition-all -mb-3">
                         <div className="md:order-2 lg:order-none">
-                            <ShutterCard />
+                            <ShutterCard posterImage="/unmaad assets/hero page/post1.svg" />
                         </div>
                         <div className="md:order-1 lg:order-none md:col-span-2 md:mb-0 lg:mb-0 z-10">
-                            <ShutterCard />
+                            <ShutterCard posterImage="/unmaad assets/hero page/post2.svg" />
                         </div>
                         <div className="md:order-3 lg:order-none">
-                            <ShutterCard />
+                            <ShutterCard posterImage="/unmaad assets/hero page/post3.svg" />
                         </div>
                     </div>
                 </div>
