@@ -13,6 +13,7 @@ const Navbar = () => {
         { name: "Events Street", href: "/pages/events-street" },
         { name: "Competition Bazaar", href: "/pages/competition-bazaar" },
         { name: "Merch Store", href: "/pages/merch-store" },
+        { name: "Contact Us", href: "/#contact-us" },
     ];
 
     return (
@@ -40,7 +41,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-normal transition-colors duration-200 font-century-gothic"
+                                    className="text-white hover:text-yellow-300 px-2 py-2 rounded-md text-sm font-normal transition-colors duration-200 font-century-gothic whitespace-nowrap"
                                 >
                                     {link.name}
                                 </Link>

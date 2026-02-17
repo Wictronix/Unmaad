@@ -6,7 +6,7 @@ import { Instagram, Facebook, Youtube } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="bg-white border-t border-gray-100 dark:bg-white dark:border-gray-200 font-century-gothic">
+        <footer id="contact-us" className="bg-white border-t border-gray-100 dark:bg-white dark:border-gray-200 font-century-gothic">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
 
