@@ -1,4 +1,12 @@
 import Image from "next/image";
+import { Metadata } from "next";
+import { sharedMetadata } from "./shared-metadata";
+
+export const metadata: Metadata = {
+  ...sharedMetadata,
+  title: "Home | Unmaad 2026",
+};
+
 
 
 import Navbar from "@/app/components/Navbar";

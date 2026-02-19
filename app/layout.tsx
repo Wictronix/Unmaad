@@ -1,11 +1,8 @@
-"use client";
-import Script from "next/script";
-import type { Metadata } from "next"; // Ensure this is at the top if using useEffect
-import { useEffect } from "react";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "./components/Navbar";
-import PageTransition from "./components/PageTransition";
 import "./globals.css";
+import ClientLayout from "./ClientLayout";
+import { sharedMetadata, siteConfig } from "./shared-metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,9 +14,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteMetadata = {
-  title: "Unmaad 2026",
-  description: "Largest B-School Cultural Fest | 27th Feb-1st Mar '26| IIM Bangalore",
+export const metadata: Metadata = {
+  ...sharedMetadata,
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.title}`,
+  },
 };
 
 export default function RootLayout({
@@ -27,45 +27,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    if (typeof window !== "undefined" && "registerProperty" in CSS) {
-      try {
-        (CSS as any).registerProperty({
-          name: "--wipe-angle",
-          syntax: "<angle>",
-          inherits: false,
-          initialValue: "0deg",
-        });
-      } catch (e) { }
-    }
-  }, []);
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#3033C8] overflow-x-hidden`}
       >
-        <Navbar />
-        <div className="relative w-full min-h-screen mt-16 lg:mt-20">
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </div>
-
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-7NWN813T9Y"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-7NWN813T9Y');
-          `}
-        </Script>
+        <ClientLayout>
+          {children}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Event",
+                name: siteConfig.title,
+                description: siteConfig.description,
+                url: siteConfig.url,
+                startDate: "2026-02-27",
+                endDate: "2026-03-01",
+                eventStatus: "https://schema.org/EventScheduled",
+                eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+                location: {
+                  "@type": "Place",
+                  name: "IIM Bangalore",
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Bannerghatta Road",
+                    addressLocality: "Bangalore",
+                    postalCode: "560076",
+                    addressCountry: "IN",
+                  },
+                },
+                organizer: {
+                  "@type": "Organization",
+                  name: "Unmaad IIMB",
+                  url: siteConfig.url,
+                  sameAs: [siteConfig.links.instagram],
+                },
+              }),
+            }}
+          />
+        </ClientLayout>
       </body>
     </html>
   );
